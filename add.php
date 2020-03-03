@@ -1,6 +1,6 @@
 <?php
 
-    include_once("connection.php");
+include_once("connection.php");
 
 ?>
 
@@ -15,7 +15,7 @@
     <!-- <link rel="stylesheet" href="style.css" href="bootstrap/bootstrap.min.css">
     <script src="bootstrap/bootstrap.min.js"></script> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 </head>
@@ -29,44 +29,66 @@
 
         <div class="panel-body">
 
-        <?php
+            <?php
 
-            if($_SERVER['REQUEST_METHOD']=='POST'){
-                
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $name = $_POST['name'];
+                $fname = $_POST['fname'];
+                $email = $_POST['email'];
+
+                if ($name == "" || $fname == "" || $email == "") {
+                    echo "<div class='alert alert-danger'>
+                        Fields must not be empty!;
+                    </div>";
+                } elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    echo "<div class='alert alert-danger'>
+                        Invalid email format!!!;
+                    </div>";
+                } else {
+
+                    $query = "insert into employee(emp_name,father_name,email) values('$name','$fname','$email')";
+                    $result = $link->query($query);
+                    if ($result) {
+
+                        echo "<div class='alert alert-success'>
+                        Data inserted successfully;
+                    </div>";
+                    }
+                }
             }
 
-        ?>
+            ?>
 
-        <form method="POST">
+            <form method="POST">
 
-            <a href="#" class="btn btn-primary">Views</a>
-            <a href="index.php" class="btn btn-primary pull-right">Back</a>
+                <a href="#" class="btn btn-primary">Views</a>
+                <a href="index.php" class="btn btn-primary pull-right">Back</a>
 
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" name="name" class="form-control">
-            </div>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
 
-            <div class="form-group">
-                <label for="name">Father Name:</label>
-                <input type="text" name="name" class="form-control">
-            </div>
+                <div class="form-group">
+                    <label for="name">Father Name:</label>
+                    <input type="text" name="fname" class="form-control">
+                </div>
 
-            <div class="form-group">
-                <label for="name">Email:</label>
-                <input type="text" name="email" class="form-control">
-            </div>
+                <div class="form-group">
+                    <label for="name">Email:</label>
+                    <input type="text" name="email" class="form-control">
+                </div>
 
-            <input type="submit" class="btn btn-primary">
-        </form>
-            
+                <input type="submit" class="btn btn-primary">
+            </form>
+
         </div>
 
         <div class="panel-footer">
-            
+
         </div>
 
-        
+
 
     </div>
 
