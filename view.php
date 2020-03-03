@@ -29,7 +29,7 @@ include_once("connection.php");
 
         <div class="panel-body">
 
-            <a href="#" class="btn btn-primary">Views</a>
+            <a href="view.php" class="btn btn-primary">Views</a>
             <a href="add.php" class="btn btn-primary pull-right" style="float: right">Add Employee</a>
             <form method="POST">
                 <table class="table">
@@ -66,6 +66,8 @@ include_once("connection.php");
                     </tr>
 
                                 <?php } } ?>
+
+                                </form>
             
 
         </div>

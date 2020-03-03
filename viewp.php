@@ -29,44 +29,70 @@ include_once("connection.php");
 
         <div class="panel-body">
 
-            <a href="#" class="btn btn-primary">Views</a>
+            <a href="view.php" class="btn btn-primary">Views</a>
             <a href="add.php" class="btn btn-primary pull-right" style="float: right">Add Employee</a>
             <form method="POST">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Serial No:</th>
-                            <th>Date</th>
-                            <th>View</th>
-                            
+                            <th>Name</th>
+                            <th>Father Name</th>
+                            <th>Email</th>
+                            <th>Attendance</th>
+
                         </tr>
                     </thead>
+                    <tbody>
 
-                        <?php
+                    <?php
 
-                            $query = "select distinct date from attend";
-                            $result = $link -> query($query);
+                    if (isset($_GET['date'])) {
+                        $date = $_GET['date'];
 
-                            if($result -> num_rows > 0){
-                                $i = 0;
-                                while($val = $result -> fetch_assoc()){
-                                    $i++;
-                                
+                        $query = "SELECT employee.*,attend.* FROM attend inner join employee on attend.emp_id = employee.emp_id and attend.date='$date'";
+                        $result = $link->query($query);
 
-                            
+                        if ($result->num_rows > 0) {
+                            $i = 0;
+                            while ($val = $result->fetch_assoc()) {
+                                $i++;
 
-                        ?>
 
-                    <tr>
 
-                        <td><?php echo $i; ?></td>
-                        <td><?php  echo $val['date']; ?></td>
-                        <td><a href="viewp.php?=<?php echo $val['date'] ?>" class="btn btn-primary">View</a></td>
 
-                    </tr>
+                    ?>
 
-                                <?php } } ?>
-            
+                                <tr>
+
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo $val['emp_name']; ?></td>
+                                    <td><?php echo $val['father_name']; ?></td>
+                                    <td><?php echo $val['email']; ?></td>
+
+                                    <td>
+                                        Present <input type="radio" value="Present" <?php if ($val['value'] == 'Present') {
+                                                                                        echo "checked";
+                                                                                    } ?>>
+                                        Absent <input type="radio" value="Absent" <?php if ($val['value'] == 'Absent') {
+                                                                                        echo "checked";
+                                                                                    } ?>>
+                                    </td>
+
+
+
+                                </tr>
+
+                    <?php }
+                        }
+                    } ?>
+
+                </tbody>
+
+                </table>
+
+                </form>
+
 
         </div>
 

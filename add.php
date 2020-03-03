@@ -40,11 +40,7 @@ include_once("connection.php");
                     echo "<div class='alert alert-danger'>
                         Fields must not be empty!;
                     </div>";
-                } elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    echo "<div class='alert alert-danger'>
-                        Invalid email format!!!;
-                    </div>";
-                } else {
+                }  else {
 
                     $query = "insert into employee(emp_name,father_name,email) values('$name','$fname','$email')";
                     $result = $link->query($query);
@@ -61,7 +57,7 @@ include_once("connection.php");
 
             <form method="POST">
 
-                <a href="#" class="btn btn-primary">Views</a>
+                <a href="view.php" class="btn btn-primary">Views</a>
                 <a href="index.php" class="btn btn-primary pull-right">Back</a>
 
                 <div class="form-group">
@@ -76,7 +72,7 @@ include_once("connection.php");
 
                 <div class="form-group">
                     <label for="name">Email:</label>
-                    <input type="text" name="email" class="form-control">
+                    <input type="email" name="email" class="form-control">
                 </div>
 
                 <input type="submit" class="btn btn-primary">
