@@ -40,7 +40,7 @@ include_once("connection.php");
                     echo "<div class='alert alert-danger'>
                         Fields must not be empty!;
                     </div>";
-                }  else {
+                } else {
 
                     $query = "insert into employee(emp_name,father_name,email) values('$name','$fname','$email')";
                     $result = $link->query($query);

@@ -30,6 +30,7 @@ include_once("connection.php");
         <div class="panel-body">
 
             <a href="view.php" class="btn btn-primary">Views</a>
+            <a href="index.php" class="btn btn-primary">Home</a>
             <a href="add.php" class="btn btn-primary pull-right" style="float: right">Add Employee</a>
             <form method="POST">
                 <table class="table">
@@ -38,37 +39,38 @@ include_once("connection.php");
                             <th>Serial No:</th>
                             <th>Date</th>
                             <th>View</th>
-                            
+
                         </tr>
                     </thead>
 
-                        <?php
+                    <?php
 
-                            $query = "select distinct date from attend";
-                            $result = $link -> query($query);
+                    $query = "select distinct date from attend";
+                    $result = $link->query($query);
 
-                            if($result -> num_rows > 0){
-                                $i = 0;
-                                while($val = $result -> fetch_assoc()){
-                                    $i++;
-                                
+                    if ($result->num_rows > 0) {
+                        $i = 0;
+                        while ($val = $result->fetch_assoc()) {
+                            $i++;
 
-                            
 
-                        ?>
 
-                    <tr>
 
-                        <td><?php echo $i; ?></td>
-                        <td><?php  echo $val['date']; ?></td>
-                        <td><a href="viewp.php?=<?php echo $val['date'] ?>" class="btn btn-primary">View</a></td>
+                    ?>
 
-                    </tr>
+                            <tr>
 
-                                <?php } } ?>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $val['date']; ?></td>
+                                <td><a href="viewp.php?=<?php echo $val['date'] ?>" class="btn btn-primary">View</a></td>
 
-                                </form>
-            
+                            </tr>
+
+                    <?php }
+                    } ?>
+
+            </form>
+
 
         </div>
 

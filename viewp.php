@@ -31,7 +31,7 @@ include_once("connection.php");
 
             <a href="view.php" class="btn btn-primary">Views</a>
             <a href="add.php" class="btn btn-primary pull-right" style="float: right">Add Employee</a>
-            <form method="POST">
+            <form method="post">
                 <table class="table">
                     <thead>
                         <tr>
@@ -43,23 +43,20 @@ include_once("connection.php");
 
                         </tr>
                     </thead>
-                    <tbody>
+
 
                     <?php
 
                     if (isset($_GET['date'])) {
                         $date = $_GET['date'];
 
-                        $query = "SELECT employee.*,attend.* FROM attend inner join employee on attend.emp_id = employee.emp_id and attend.date='$date'";
+                        $query = "SELECT * FROM attend inner join employee on attend.emp_id = employee.emp_id and attend.date='$date'";
                         $result = $link->query($query);
 
                         if ($result->num_rows > 0) {
                             $i = 0;
                             while ($val = $result->fetch_assoc()) {
                                 $i++;
-
-
-
 
                     ?>
 
@@ -81,17 +78,17 @@ include_once("connection.php");
 
 
 
+
+
                                 </tr>
 
                     <?php }
                         }
                     } ?>
 
-                </tbody>
 
-                </table>
 
-                </form>
+
 
 
         </div>

@@ -119,7 +119,7 @@ include_once("connection.php");
                 </table>
                 <input class="btn btn-primary" type="submit" value="Take Attendance">
             </form>
-            
+
 
         </div>
 
