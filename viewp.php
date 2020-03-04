@@ -50,7 +50,7 @@ include_once("connection.php");
                     if (isset($_GET['date'])) {
                         $date = $_GET['date'];
 
-                        $query = "SELECT * FROM attend inner join employee on attend.emp_id = employee.emp_id and attend.date='$date'";
+                        $query = "SELECT * FROM employee inner join attend on attend.emp_id = employee.emp_id and attend.date='$date'";
                         $result = $link->query($query);
 
                         if ($result->num_rows > 0) {
